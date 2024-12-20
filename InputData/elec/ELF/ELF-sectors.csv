@@ -1,9 +1,9 @@
 Unit: dimensionless (MW-peak/MW-avg),summer,winter
-transportation sector (NOT USED),0,0
-electricity sector (NOT USED),0,0
-residential buildings sector (NOT USED),0,0
-commercial buildings sector (NOT USED),0,0
-industry sector,1.17,1.17
-district heat and hydrogen sector,1,1
-LULUCF sector (NOT USED),0,0
-geoengineering sector,1,1
+transportation sector (NOT USED),0.0,0.0
+electricity sector (NOT USED),0.0,0.0
+residential buildings sector (NOT USED),0.0,0.0
+commercial buildings sector (NOT USED),0.0,0.0
+industry sector,1.1714151957,1.1711894273
+district heat and hydrogen sector,1.0,1.0
+LULUCF sector (NOT USED),0.0,0.0
+geoengineering sector,1.0,1.0
