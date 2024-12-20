@@ -121,11 +121,13 @@ Grams per Million Metric Tons CO2e = 1e+12
 
 ICM CH4 2030 Target = -30
 	~	Dmnl
-	~		|
+	~		~	:SUPPLEMENTARY 
+	|
 
 ICM Distributed Generation 2030 Target = 6.5
 	~	GW
-	~		|
+	~		~	:SUPPLEMENTARY 
+	|
 
 ICM Solar Target Achieved Year = SAMPLE IF TRUE( ( CPL Electricity Generation Capacity[
              solar PV es] > ICM Solar Target Amount ) :AND: ( ICM Solar Target Achieved Year
@@ -139,7 +141,8 @@ ICM Solar Target Amount = 27
 
 ICM Solar Target Year = 2030
 	~	Year
-	~		|
+	~		~	:SUPPLEMENTARY 
+	|
 
 ICM Total CO2e Emissions Reduction Target in 2030 = -35
 	~	Percentage
@@ -148,7 +151,8 @@ ICM Total CO2e Emissions Reduction Target in 2030 = -35
 
 ICM Transmission Target = 0
 	~	
-	~		|
+	~		~	:SUPPLEMENTARY 
+	|
 
 ICM Wind Target Achieved Year = SAMPLE IF TRUE( ( CPL Electricity Generation Capacity[
              onshore wind es] > ICM Wind Target Amount ) :AND: ( ICM Wind Target Achieved Year
@@ -162,7 +166,8 @@ ICM Wind Target Amount = 18
 
 ICM Wind Target Year = 2030
 	~	Year
-	~		|
+	~		~	:SUPPLEMENTARY 
+	|
 
 Is Minimum Required EV Sales Binding[Vehicle Type,Cargo Type,Vehicle Technology] = IF THEN ELSE ( 
              New Vehicles after Charger Deployment[Vehicle Type,Cargo Type,Vehicle Technology
