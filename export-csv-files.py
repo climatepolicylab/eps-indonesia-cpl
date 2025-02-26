@@ -44,7 +44,7 @@ spyderMenuChoice = MenuChoices.CHOICE_DIST_HEAT
 
 
 def is_running_in_spyder():
-return 'spyder' in sys.modules
+    return 'spyder' in sys.modules
 
 if not is_running_in_spyder():
     # print("Not running in Spyder")
