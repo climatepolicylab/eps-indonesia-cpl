@@ -28727,8 +28727,8 @@ Energy Service Demand Feedbacks
 12,0,0,-399,65,608,43,8,135,0,4,-1,0,0,0,-1--1--1,255-255-128,|||0-0-0,0,0,0,0,0,0
 In the demand sectors' energy demand feedback loops, we want to feed back in only the percent change in demand caused by the indirect and induced effects of the policy package (as the direct effects are already included in each of these sectors).  The exception is the "Buy In-Region" policy lever, whose direct effects are not included in each sector (as the first place that policy influences the calculation flow is in the I/O model).  Therefore, its direct impacts need to be added to the macroeconomic feedback loops to capture associated energy use and emissions.  (The indirect and induced effects of the Buy In-Region policy are already part of the total indirect and induced effects, so they are already included in the macroeconomic feedback loops.)
 1,0,7F51C3565FB9BE2BC2194FF4B4D28396997F6044,96F40C08E21EDF9DC769A81B0B79F1904976AC07,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,BAU Gross Domestic Product by ISIC Code,-278,205,80,19,8,2,0,7,-1,0,0,0,128-128-128,192-192-192,|||128-128-128,0,0,0,0,0,0
-1,0,C63E092339564600E7DE77758DE50E5835D39EAF,7F51C3565FB9BE2BC2194FF4B4D28396997F6044,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
+10,0,BAU Gross Domestic Product by ISIC Code,-278,205,80,19,8,2,0,7,-1,1,0,0,128-128-128,192-192-192,|||128-128-128,0,0,0,0,0,0
+1,0,F1AF4FF3120C51B381CA76A3ACF0681DDA923DC8,7F51C3565FB9BE2BC2194FF4B4D28396997F6044,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 12,0,0,1334,-5,1029,25,3,135,0,12,-1,3,0,0,-1--1--1,192-255-255,|18||0-0-0,0,0,0,0,0,0
 Cash Flow Feedbacks
 10,0,Change in Domestic Value Added by ISIC Code,439,286,89,24,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
@@ -28796,7 +28796,7 @@ Change in Domestic Production
 We assume VAT and sales tax are not charged on ISIC codes that are not industry categories, as these mostly encompass things like education, real estate, consulting services, finance and insurance, social work, etc.
 12,0,0,1171,380,248,42,8,135,0,4,-1,0,0,0,-1--1--1,255-255-128,|||0-0-0,0,0,0,0,0,0
 Therefore, we do not need any structure here to calculate VAT on indirect and induced output.  However, we do not currently attempt to model corporate income taxes.  (See GitHub issue #224 for details.)  If we were to calculate corporate income tax in the future, it would go here.
-1,0,C63E092339564600E7DE77758DE50E5835D39EAF,96F40C08E21EDF9DC769A81B0B79F1904976AC07,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
+1,0,F1AF4FF3120C51B381CA76A3ACF0681DDA923DC8,96F40C08E21EDF9DC769A81B0B79F1904976AC07,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,Indirect Change in Domestic Value Added by ISIC Code,439,438,80,27,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Induced Change in Domestic Value Added by ISIC Code,440,524,78,28,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Indirect Change in Domestic Output by ISIC Code,697,438,66,29,8,131,0,0,0,0,0,0,0,0,0,0,0,0
@@ -31654,6 +31654,7 @@ Allocating BAU energy revenue to fuel types should not change the total amount o
 22:water output unit,water output units
 22:Week,Weeks
 22:Year,Years,yr,yrs
+10:CAS-Version 2.cin
 23:0
 15:0,0,0,0,0,0
 27:0,
