@@ -1,4 +1,4 @@
-Unnamed: 0,Rebound Emis Factor
+Unnamed: 0,Rebound Emis Factor (dimensionless)
 CO2,0.0
 VOC,0.0
 CO,0.0
@@ -8,6 +8,6 @@ PM25,0.0
 SOx,0.0
 BC,0.0
 OC,0.0
-CH4,0.0004299717
-N2O,3.50038e-05
+CH4,0.0015377231
+N2O,3.9432e-05
 F gases,0.0
