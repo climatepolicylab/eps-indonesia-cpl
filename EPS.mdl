@@ -1,4 +1,7 @@
 {UTF-8}
+
+
+
 Absolute Change in In Scope Emissions due to Electricity Imports[Pollutant,Electricity Source
 ] = IF THEN ELSE ( BIEfIE Boolean Include Emissions from Imported Electricity > 0, Pollutant Emissions from Imported Electricity[
              Pollutant,Electricity Source] , 0) 
@@ -349,12 +352,6 @@ Annualized Fixed OM Costs per Unit Output[Electricity Source,Power Plant Quality
              ] , Expected Capacity Factor x Hours per Year[Electricity Source,Power Plant Quality
              ] ) 
 	~	$/(MW*hour)
-	~		|
-
-AOCoLUPpUA Annual Ongoing Cost of Land Use Policies per Unit Area[Land Use Policy] = 
-                GET DIRECT CONSTANTS('InputData/land/AOCoLUPpUA/AOCoLUPpUA.csv', ',', 
-                'B2*')
-	~	$/acre
 	~		|
 
 ARpUIiRC Annual Retirement per Unit Increase in Relative Cost[Electricity Source] = GET DIRECT CONSTANTS(
@@ -4294,11 +4291,6 @@ biomass and biofuel within all fuels : biomass,biofuel gasoline,biofuel diesel
 	~	
 	~		|
 
-BLAPE BAU LULUCF Anthropogenic Pollutant Emissions[Pollutant] := GET DIRECT DATA('InputData/land/BLAPE/BLAPE.csv'
-                , ',', '1', 'B2')
-	~	g pollutant
-	~		|
-
 BLP BAU LCFS Percentage := GET DIRECT DATA('InputData/trans/BLP/BLP.csv', ',', '1', 'B2'
         )
 	~	Dmnl
@@ -5293,11 +5285,6 @@ Electricity Source,Power Plant Quality] = ZIDZ ( Capital Cost of Epqt to Sequest
 	~	$/metric ton CO2e/Year
 	~		|
 
-CApULAbIFM CO2 Abated per Unit Land Area by Improved Forest Management = GET DIRECT CONSTANTS(
-                'InputData/land/CApULAbIFM/CApULAbIFM.csv', ',', 'B2*')
-	~	g pollutant/acre
-	~		|
-
 Carbon Free Energy after LCFS[Vehicle Type,Cargo Type,Vehicle Technology,Transportation Fuel
 ] = Carbon Free Energy in Absence of LCFS by Vehicle Type[Vehicle Type,Cargo Type,Vehicle Technology
         ,Transportation Fuel] + Additional Carbon Free Energy Allocated by Fuel and Technology[
@@ -6190,13 +6177,6 @@ Change in Fare Revenue by Transport Supplier[Cash Flow Entity] = SUM ( Change in
 	~	$
 	~		|
 
-Change in Forest Expenses by Entity[Cash Flow Entity] = ( SUM ( Cost of Implementing Land Use Policies[
-             Land Use Policy!] ) + SUM ( Cost of Maintaining Area Previously Affected by Land Use Policies[
-                  Land Use Policy!] ) ) * FoFObE Fraction of Forests Owned by Entity[
-             Cash Flow Entity] 
-	~	$
-	~		|
-
 Change in Fuel Export Revenue[All Fuels] = Change in Fuel Exports[All Fuels] * IMFPbFT International Market Fuel Price by Fuel Type[
              All Fuels] 
 	~	$
@@ -6614,14 +6594,6 @@ Change in Labor and Consumers Earnings After Income Taxes = SUM ( Change in Dome
              ISIC Code!] ) - SUM ( Change in Domestic Individual Income Tax Revenue by ISIC Code[
                   ISIC Code!] ) 
 	~	$
-	~		|
-
-Change in LULUCF Emissions[Pollutant] :EXCEPT: [CO2] = SUM ( CO2 Abated by Land Use Policy This Year[
-             Land Use Policy!] ) * RPEpUACE Rebound Pollutant Emissions per Unit Avoided CO2 Emissions[
-             Pollutant]  ~~|
-Change in LULUCF Emissions[CO2] = - SUM ( CO2 Abated by Land Use Policy This Year[Land Use Policy!
-             ] ) 
-	~	g pollutant
 	~		|
 
 Change in LULUCF Pollutant Emissions[Pollutant] = LULUCF Anthropogenic Pollutant Emissions[
@@ -7270,11 +7242,6 @@ Check for Equality of Transportation Sector Nonenergy Industry Revenue = SUM ( T
 	~		~	:SUPPLEMENTARY 
 	|
 
-CiLVpUAAbP Change in Land Value per Unit Area Affected by Policy[Land Use Policy] = GET DIRECT CONSTANTS(
-                'InputData/land/CiLVpUAAbP/CiLVpUAAbP.csv', ',', 'B2*')
-	~	$/acre
-	~		|
-
 CIRbTF Carbon Intensity Ratios by Transportation Fuel[Transportation Fuel] = GET DIRECT CONSTANTS(
                 'InputData/trans/CIRbTF/CIRbTF.csv', ',', 'B2*')
 	~	Dmnl
@@ -7283,20 +7250,6 @@ CIRbTF Carbon Intensity Ratios by Transportation Fuel[Transportation Fuel] = GET
 CL Component Lifetime[Building Type,Building Component] = GET DIRECT CONSTANTS('InputData/bldgs/CL/CL.csv'
                 , ',', 'B2*')
 	~	years
-	~		|
-
-CO2 Abated by Improved Forest Management This Year = Land Area Newly Affected by Policy[
-        land forest management] * One Year * CApULAbIFM CO2 Abated per Unit Land Area by Improved Forest Management
-             
-	~	g pollutant
-	~		|
-
-CO2 Abated by Land Use Policy This Year[Land Use Policy] :EXCEPT: [land forest management
-] = Cumulative Total Land Area Affected by Policy[Land Use Policy] * CSpULApYbP CO2 Sequestered per Unit Land Area per Year by Policy[
-             Land Use Policy]  ~~|
-CO2 Abated by Land Use Policy This Year[land forest management] = CO2 Abated by Improved Forest Management This Year
-        
-	~	g pollutant
 	~		|
 
 CO2 Captured via DAC = DACD Direct Air Capture Potential * Fraction of Direct Air Capture Potential Achieved This Year
@@ -7462,18 +7415,6 @@ Cost of Capacity Construction[Electricity Source] = ( New Generation Capacity[El
 
 Cost of CHP Conversion for Heat = Heat Shifted to CHP Facilities This Year * CtIEPpUESoS Cost to Implement Efficiency Policy per Unit Energy Saved or Shifted[
              indst CHP] 
-	~	$
-	~		|
-
-Cost of Implementing Land Use Policies[Land Use Policy] = Land Area Newly Affected by Policy[
-        Land Use Policy] * One Year * ICoLUPpUA Implementation Cost of Land Use Policies per Unit Area[
-             Land Use Policy] 
-	~	$
-	~		|
-
-Cost of Maintaining Area Previously Affected by Land Use Policies[Land Use Policy] = 
-        Cumulative Total Land Area Affected by Policy[Land Use Policy] * AOCoLUPpUA Annual Ongoing Cost of Land Use Policies per Unit Area[
-             Land Use Policy] 
 	~	$
 	~		|
 
@@ -7755,11 +7696,6 @@ CRbQ Capacity Retirements before Quantization[Electricity Source] := GET DIRECT 
 	~	MW
 	~		|
 
-CSpULApYbP CO2 Sequestered per Unit Land Area per Year by Policy[Land Use Policy] = GET DIRECT CONSTANTS(
-                'InputData/land/CSpULApYbP/CSpULApYbP.csv', ',', 'B2*')
-	~	g pollutant/acre
-	~		|
-
 CtIEPpUESoS Cost to Implement Efficiency Policy per Unit Energy Saved or Shifted[Industry Energy Efficiency Policy
 ] := GET DIRECT DATA('InputData/indst/CtIEPpUESoS/CtIEPpUESoS.csv', ',', '1', 'B2')
 	~	$/BTU
@@ -7774,13 +7710,6 @@ Cumulative Battery Capacity Deployed = Cumulative EV Battery Capacity Deployed a
 
 Cumulative Change in Household Savings = Last Year Cumulative Change in Household Savings
         + Change in Household Savings * One Year 
-	~	$
-	~		~	:SUPPLEMENTARY 
-	|
-
-Cumulative Change in Land Value from Land Use Policies[Land Use Policy] = Cumulative Total Land Area Affected by Policy[
-        Land Use Policy] * CiLVpUAAbP Change in Land Value per Unit Area Affected by Policy[
-             Land Use Policy] 
 	~	$
 	~		~	:SUPPLEMENTARY 
 	|
@@ -7800,12 +7729,6 @@ Cumulative Total Distributed Solar Capacity Caused by Policies[Building Type] = 
         Building Type] + Distributed Solar Capacity Caused by Policies This Year[Building Type
              ] * One Year 
 	~	MW
-	~		|
-
-Cumulative Total Land Area Affected by Policy[Land Use Policy] = Last Year Cumulative Total Land Area Affected by Policy[
-        Land Use Policy] + Land Area Newly Affected by Policy[Land Use Policy] * One Year
-                  
-	~	acres
 	~		|
 
 Cumulative Vehicles Deployed as of Last Year[Vehicle Type,Cargo Type,Vehicle Technology
@@ -9668,13 +9591,6 @@ FoBObE Fraction of Buildings Owned by Entity[energy supplier cash flow entity,Bu
 	~	Dmnl
 	~		|
 
-FoFObE Fraction of Forests Owned by Entity[Cash Flow Entity] :EXCEPT: [cash flow entity excluding energy suppliers
-] = 0 ~~|
-FoFObE Fraction of Forests Owned by Entity[cash flow entity excluding energy suppliers
-] = GET DIRECT CONSTANTS('InputData/land/FoFObE/FoFObE.csv', ',', 'B2*')
-	~	Dmnl
-	~		|
-
 FoGPbEaIC Fraction of Goods Purchased by Entity[Industry Category,Cash Flow Entity] :EXCEPT: 
 [Industry Category,cash flow entity excluding energy suppliers] = 0 ~~|
 FoGPbEaIC Fraction of Goods Purchased by Entity[Industry Category,cash flow entity excluding energy suppliers
@@ -10229,21 +10145,6 @@ Fraction of Installation and System Integration Issues Remedied = 0
 
 Fraction of Installation and System Integration Issues Remedied This Year = Fraction of Installation and System Integration Issues Remedied
         * Selected Policy Implementation Schedule[indst system integration X] 
-	~	Dmnl
-	~		|
-
-Fraction of Land Use Policy Achieved This Year by Policy[land forest set asides] = Fraction of Forest Set Asides Achieved This Year
-         ~~|
-Fraction of Land Use Policy Achieved This Year by Policy[land afforestation and reforestation
-] = Fraction of Afforestation and Reforestation Achieved This Year  ~~|
-Fraction of Land Use Policy Achieved This Year by Policy[land forest management] = Fraction of Improved Forest Management Achieved This Year
-         ~~|
-Fraction of Land Use Policy Achieved This Year by Policy[land avoid deforestation] = 
-        Fraction of Avoided Deforestation Achieved This Year  ~~|
-Fraction of Land Use Policy Achieved This Year by Policy[land peatland restoration] = 
-        Fraction of Peatland Restoration Achieved This Year  ~~|
-Fraction of Land Use Policy Achieved This Year by Policy[land forest restoration] = Fraction of Forest Restoration Achieved This Year
-        
 	~	Dmnl
 	~		|
 
@@ -11515,11 +11416,6 @@ Building Fuel,Building Component] = MAX ( 0, MIN ( Hypothetical BAU Last Year Co
 	~	BTU/Year
 	~		|
 
-ICoLUPpUA Implementation Cost of Land Use Policies per Unit Area[Land Use Policy] = GET DIRECT CONSTANTS(
-                'InputData/land/ICoLUPpUA/ICoLUPpUA.csv', ',', 'B2*')
-	~	$/ acre
-	~		|
-
 ICpUEfEBE Incremental Cost per Unit Energy for Electrified Building Equipment[Building Type
 ,Building Component,Building Fuel] :EXCEPT: [Building Type,heating,Building Fuel], [Building Type
 ,appliances,Building Fuel], [Building Type,other component,Building Fuel] = 0 ~~|
@@ -12368,12 +12264,6 @@ kW per MW = 1000
 	~	kW/MW
 	~		|
 
-Land Area Newly Affected by Policy[Land Use Policy] = PLANAbPiaSY Potential Land Area Newly Affected by Policy in a Single Year[
-        Land Use Policy] / One Year * Fraction of Land Use Policy Achieved This Year by Policy[
-             Land Use Policy] 
-	~	acres / Year
-	~		|
-
 Land Use Policy : land forest set asides,land afforestation and reforestation,land forest management
         ,land avoid deforestation,land peatland restoration,land forest restoration
 	~	
@@ -12482,11 +12372,6 @@ Last Year Cumulative Total Distributed Solar Capacity Caused by Policies[Buildin
 ] = INTEG( Distributed Solar Capacity Caused by Policies This Year[Building Type] , 0
              ) 
 	~	MW
-	~		|
-
-Last Year Cumulative Total Land Area Affected by Policy[Land Use Policy] = INTEG( Land Area Newly Affected by Policy[
-             Land Use Policy] , 0) 
-	~	acres
 	~		|
 
 Last Year Domestic Output by ISIC Code[ISIC Code] = DELAY FIXED ( Domestic Output by ISIC Code[
@@ -12703,37 +12588,6 @@ LPGRbIC Labor Productivity Growth Rate by ISIC Code[ISIC Code] := GET DIRECT DAT
 LpWOU Liters per Water Output Unit = GET DIRECT CONSTANTS('InputData/web-app/LpWOU/LpWOU.csv'
                 , ',', 'B2*')
 	~	l/water output unit
-	~		|
-
-LULUCF Anthropogenic Pollutant Emissions[Pollutant] = BLAPE BAU LULUCF Anthropogenic Pollutant Emissions[
-        Pollutant] + Change in LULUCF Emissions[Pollutant] 
-	~	g pollutant
-	~		|
-
-LULUCF Change in Nonenergy Expenditures by Entity[Cash Flow Entity] = Change in Forest Expenses by Entity[
-        Cash Flow Entity] 
-	~	$
-	~		|
-
-LULUCF Change in Nonenergy Industry Expenditures by ISIC Code[ISIC Code] :EXCEPT: [ISIC 01T03
-] = 0 ~~|
-LULUCF Change in Nonenergy Industry Expenditures by ISIC Code[ISIC 01T03] = LULUCF Change in Nonenergy Expenditures by Entity[
-        nonenergy industries] 
-	~	$
-	~		|
-
-LULUCF Change in Nonenergy Industry Revenue by ISIC Code[ISIC Code] :EXCEPT: [ISIC 01T03
-] = 0 ~~|
-LULUCF Change in Nonenergy Industry Revenue by ISIC Code[ISIC 01T03] = SUM ( Change in Forest Expenses by Entity[
-             Cash Flow Entity!] ) 
-	~	$
-	~		|
-
-LULUCF Change in Revenue by Entity[Cash Flow Entity] :EXCEPT: [nonenergy industries] = 
-        0 ~~|
-LULUCF Change in Revenue by Entity[nonenergy industries] = SUM ( LULUCF Change in Nonenergy Industry Revenue by ISIC Code[
-             ISIC Code!] ) 
-	~	$
 	~		|
 
 Manufacturing and Construction ISIC Code : ISIC 10T12,ISIC 13T15,ISIC 16,ISIC 17T18,ISIC 20
@@ -16729,11 +16583,6 @@ PIFURfE Percentage Industry Fuel Use Reduction for Electricity[Industry Temperat
 	~	Dmnl
 	~		|
 
-PLANAbPiaSY Potential Land Area Newly Affected by Policy in a Single Year[Land Use Policy
-] := GET DIRECT DATA('InputData/land/PLANAbPiaSY/PLANAbPiaSY.csv', ',', '1', 'B2')
-	~	acres
-	~		|
-
 PMCCS Policy Mandated Capacity Construction Schedule[Electricity Source] := GET DIRECT DATA(
                 'InputData/elec/PMCCS/PMCCS.csv', ',', '1', 'B2')
 	~	MW
@@ -17688,11 +17537,6 @@ RoNEPtAPPpULA Ratio of Nutritionally Equivalent Plant to Animal Products Produce
 
 RPbBCT Rebate Percentage by Building Component Type[Building Type,Building Component] 
         = GET DIRECT CONSTANTS('InputData/bldgs/RPbBCT/RPbBCT.csv', ',', 'B2*')
-	~	Dmnl
-	~		|
-
-RPEpUACE Rebound Pollutant Emissions per Unit Avoided CO2 Emissions[Pollutant] = GET DIRECT CONSTANTS(
-                'InputData/land/RPEpUACE/RPEpUACE.csv', ',', 'B2*')
 	~	Dmnl
 	~		|
 
@@ -26108,106 +25952,6 @@ Allocating Changes in Revenue
 1,0,72BEB928B2B4FE9DF48FFB9B6E8BADAD0C80D625,993D1131F3512D7DC439E8C94CA408E0DF71E855,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 \\\---/// Sketch information - do not modify anything except names
 V301  Do not put anything below this section - it will be ignored
-*Land Use and Forestry
-$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
-10,0,BLAPE BAU LULUCF Anthropogenic Pollutant Emissions,1292,188,80,28,8,131,0,4,0,0,0,0,-1--1--1,192-128-192,|||0-0-0,0,0,0,0,0,0
-10,0,LULUCF Anthropogenic Pollutant Emissions,1292,284,84,19,8,131,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
-10,0,FoFObE Fraction of Forests Owned by Entity,2108,156,60,28,8,131,0,4,0,0,0,0,-1--1--1,255-128-192,|||0-0-0,0,0,0,0,0,0
-10,0,Change in Forest Expenses by Entity,2108,277,63,20,8,131,0,4,0,0,0,0,-1--1--1,192-192-192,|||0-0-0,0,0,0,0,0,0
-1,0,8882AF81939F652CA8D169A8C4E7DFBCAAA20462,8772DC9DA6E94A2F0B453DC51215DC3EF76F1DA7,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-12,0,0,2551,241,172,27,8,135,0,4,-1,0,0,0,-1--1--1,255-255-128,|||0-0-0,0,0,0,0,0,0
-Since lost land value is not a cash flow, we do not sum this type of cost impact with actual cash flows.  Instead, we calculate it and report it here, separately.
-10,0,LULUCF Change in Nonenergy Industry Revenue by ISIC Code,827,953,80,31,8,131,0,16,0,0,0,0,-1--1--1,192-192-192,||I|0-0-0,0,0,0,0,0,0
-12,0,0,1623,872,469,263,3,188,0,0,1,0,0,0,0,0,0,0,0,0
-LULUCF_CO2_Impact
-12,0,0,624,-55,804,20,3,135,0,12,-1,2,0,0,-1--1--1,192-255-255,|16||0-0-0,0,0,0,0,0,0
-Determining Change in Emissions
-10,0,PLANAbPiaSY Potential Land Area Newly Affected by Policy in a Single Year,264,284,88,29,8,131,0,4,0,0,0,0,-1--1--1,192-128-192,|||0-0-0,0,0,0,0,0,0
-10,0,Last Year Cumulative Total Land Area Affected by Policy,492,412,104,27,3,131,0,0,0,0,0,0,0,0,0,0,0,0
-12,0,48,155,412,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,0,4AA93D794DF641B1D1181DE5C54CE8E67F5A2459,777F13141D32DA5FF5616F664E0E4792A55C5604,4,0,0,22,0,0,0,-1--1--1,,1|(330,412)|
-1,0,4AA93D794DF641B1D1181DE5C54CE8E67F5A2459,D8A24882277D46D1A93C78B412C57A7D9CC6225D,100,0,0,22,0,0,0,-1--1--1,,1|(210,412)|
-11,0,0,264,412,8,8,34,3,0,0,3,0,0,0,0,0,0,0,0,0
-10,0,Land Area Newly Affected by Policy,264,383,59,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,0,Fraction of Afforestation and Reforestation Achieved This Year,-44,68,115,19,8,130,0,5,-1,0,0,0,128-128-128,128-192-255,|||128-128-128,0,0,0,0,0,0
-10,0,Fraction of Avoided Deforestation Achieved This Year,-44,179,116,20,8,130,0,5,-1,0,0,0,128-128-128,128-192-255,|||128-128-128,0,0,0,0,0,0
-10,0,Fraction of Forest Set Asides Achieved This Year,-44,13,93,20,8,130,0,5,-1,0,0,0,128-128-128,128-192-255,|||128-128-128,0,0,0,0,0,0
-10,0,Fraction of Improved Forest Management Achieved This Year,-44,123,113,20,8,130,0,5,-1,0,0,0,128-128-128,128-192-255,|||128-128-128,0,0,0,0,0,0
-10,0,Fraction of Peatland Restoration Achieved This Year,-44,237,108,24,8,130,0,5,-1,0,0,0,128-128-128,128-192-255,|||128-128-128,0,0,0,0,0,0
-10,0,Fraction of Forest Restoration Achieved This Year,-44,295,107,20,8,130,0,5,-1,0,0,0,128-128-128,128-192-255,|||128-128-128,0,0,0,0,0,0
-10,0,Fraction of Land Use Policy Achieved This Year by Policy,-44,383,100,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,0,8AA5F37BB4DCFEA5E836F460538070D0B4FB569F,0A49658C64166507EE6942910D68E6A1A6926429,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,BE2F901E55FD6D57B7BEEFE1B518AEAEBB00452B,0A49658C64166507EE6942910D68E6A1A6926429,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,90EFB28BFF1E91B5D1D5E851F19718F223D0C60D,0A49658C64166507EE6942910D68E6A1A6926429,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,9AC916B676C8B53CDBBF8606BE1A886A423A1A86,0A49658C64166507EE6942910D68E6A1A6926429,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,9188BBC99B675B7E35C97AA339861D0069FC8322,0A49658C64166507EE6942910D68E6A1A6926429,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,323A2657E3B31795A928B8EB30F737870BF16E62,0A49658C64166507EE6942910D68E6A1A6926429,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,0A49658C64166507EE6942910D68E6A1A6926429,EBB776BDE3AE00056D2FBFC3825F6FDA53123C12,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,678B187DB24AB2D84200D0B37FC0AA514E97B7B4,EBB776BDE3AE00056D2FBFC3825F6FDA53123C12,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,CSpULApYbP CO2 Sequestered per Unit Land Area per Year by Policy,752,188,88,28,8,131,0,4,0,0,0,0,-1--1--1,255-128-192,|||0-0-0,0,0,0,0,0,0
-10,0,Cumulative Total Land Area Affected by Policy,492,284,77,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,0,EBB776BDE3AE00056D2FBFC3825F6FDA53123C12,19D13D24071046C02977419F4582313C840ABB80,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,777F13141D32DA5FF5616F664E0E4792A55C5604,19D13D24071046C02977419F4582313C840ABB80,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,CO2 Abated by Land Use Policy This Year,752,284,71,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,0,72D4C212DBB7C2FA37C4705B2D1B5CF06E5C74C5,98B1F1CC203C297FEC6C0CD6D704BBB3DF27D533,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,19D13D24071046C02977419F4582313C840ABB80,98B1F1CC203C297FEC6C0CD6D704BBB3DF27D533,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,RPEpUACE Rebound Pollutant Emissions per Unit Avoided CO2 Emissions,1020,188,93,29,8,131,0,4,-1,0,0,0,-1--1--1,255-128-192,|||128-128-128,0,0,0,0,0,0
-10,0,CApULAbIFM CO2 Abated per Unit Land Area by Improved Forest Management,752,521,100,29,8,131,0,4,0,0,0,0,-1--1--1,255-128-192,|||0-0-0,0,0,0,0,0,0
-10,0,CO2 Abated by Improved Forest Management This Year,752,412,99,25,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,0,7C9D75EAFA4E585030CACB092CA7701C23A929B1,5E01D2942B9F59B67D188645F6CF2E17D42EF84A,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,4AA93D794DF641B1D1181DE5C54CE8E67F5A2459,5E01D2942B9F59B67D188645F6CF2E17D42EF84A,1,0,0,0,0,128,0,-1--1--1,,1|(481,468)|
-1,0,5E01D2942B9F59B67D188645F6CF2E17D42EF84A,98B1F1CC203C297FEC6C0CD6D704BBB3DF27D533,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,Change in LULUCF Emissions,1020,284,68,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,0,98B1F1CC203C297FEC6C0CD6D704BBB3DF27D533,5B77CE923877F337A512F578B0CE4EC1EEEC13B4,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,E330E6F489E041B56965B0F4353CBD38AB32792E,5B77CE923877F337A512F578B0CE4EC1EEEC13B4,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,5B77CE923877F337A512F578B0CE4EC1EEEC13B4,2696AC40A35608D0DCC2E8F2221B0B26E54B4551,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-12,0,0,648,100,203,57,8,135,0,4,-1,0,0,0,-1--1--1,255-255-128,|||0-0-0,0,0,0,0,0,0
-We annualize abatement from avoidance of large one-time carbon releases (deforestation, peat fires) over the time required for the forest or peatland to regenerate after a major carbon release.  This avoids unrealistic, spiky results and also allows the associated policies to be treated in a way consistent with other land use sector policies (except improved forest management).
-12,0,0,1868,-55,335,20,3,135,0,12,-1,2,0,0,-1--1--1,192-255-255,|16||0-0-0,0,0,0,0,0,0
-Determining Costs
-10,0,ICoLUPpUA Implementation Cost of Land Use Policies per Unit Area,1867,53,96,28,8,131,0,4,0,0,0,0,-1--1--1,255-128-192,|||0-0-0,0,0,0,0,0,0
-10,0,AOCoLUPpUA Annual Ongoing Cost of Land Use Policies per Unit Area,1867,408,88,28,8,131,0,4,0,0,0,0,-1--1--1,255-128-192,|||0-0-0,0,0,0,0,0,0
-10,0,Land Area Newly Affected by Policy,1627,156,64,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-10,0,Cumulative Total Land Area Affected by Policy,1627,277,84,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-10,0,Cost of Implementing Land Use Policies,1867,156,68,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,0,Cost of Maintaining Area Previously Affected by Land Use Policies,1867,277,88,31,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,0,43DEC39D410B36C0A6B1710CEB1E64DE2360F413,A3CA48259B29EA6C55C2E69D70A4D0C21484274B,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,B0748C2B291CDDA5F71CF123A5FD245988D295BF,A3CA48259B29EA6C55C2E69D70A4D0C21484274B,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,1BC6A1A5537BCE64022A74C49CCA1808FA754468,1A57729553EC1E27F1C742433BDEBF9523CF46C3,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,2DF9872ABFB2ABF1362C7C3D61C935C4886B8062,1A57729553EC1E27F1C742433BDEBF9523CF46C3,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,A3CA48259B29EA6C55C2E69D70A4D0C21484274B,8772DC9DA6E94A2F0B453DC51215DC3EF76F1DA7,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,1A57729553EC1E27F1C742433BDEBF9523CF46C3,8772DC9DA6E94A2F0B453DC51215DC3EF76F1DA7,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,CiLVpUAAbP Change in Land Value per Unit Area Affected by Policy,2636,44,83,28,8,131,0,4,0,0,0,0,-1--1--1,255-128-192,|||0-0-0,0,0,0,0,0,0
-10,0,Cumulative Total Land Area Affected by Policy,2383,165,84,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-10,0,Cumulative Change in Land Value from Land Use Policies,2636,165,72,29,8,131,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
-1,0,D1104E496701594F69E8755992E7C8C5BDFF5464,6FD7CB204605E4EF4603035E0A7BE5A1529C510E,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,728EEC8C3E4C14415504552CCAEA83B55FA73405,6FD7CB204605E4EF4603035E0A7BE5A1529C510E,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-12,0,0,2516,-55,248,20,3,135,0,12,-1,2,0,0,-1--1--1,192-255-255,|16||0-0-0,0,0,0,0,0,0
-Determining Change in Land Value
-10,0,One Year,264,500,43,11,8,2,1,19,-1,0,0,0,128-128-128,0-0-0,||I|128-128-128,0,0,0,0,0,0
-1,0,E98416D420DDE870F221F53C46717ACF672C7159,4AA93D794DF641B1D1181DE5C54CE8E67F5A2459,0,1,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,E98416D420DDE870F221F53C46717ACF672C7159,19D13D24071046C02977419F4582313C840ABB80,0,1,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,E98416D420DDE870F221F53C46717ACF672C7159,5E01D2942B9F59B67D188645F6CF2E17D42EF84A,1,1,0,0,0,128,0,-1--1--1,,1|(489,501)|
-10,0,One Year,1656,53,43,11,8,2,1,19,-1,0,0,0,128-128-128,0-0-0,||I|128-128-128,0,0,0,0,0,0
-1,0,AEBDD3BB970A312C009EBBD9E126B65E9BDCA873,A3CA48259B29EA6C55C2E69D70A4D0C21484274B,0,1,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,1E3991A4D1C1DB30D22FFA61143915754D097F9A,2696AC40A35608D0DCC2E8F2221B0B26E54B4551,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-12,0,0,188,668,331,24,3,135,0,12,-1,3,0,0,-1--1--1,192-255-255,|18||0-0-0,0,0,0,0,0,0
-Allocating Changes in Expenditures
-12,0,0,827,668,236,24,3,135,0,12,-1,3,0,0,-1--1--1,192-255-255,|18||0-0-0,0,0,0,0,0,0
-Allocating Changes in Revenue
-10,0,LULUCF Change in Nonenergy Expenditures by Entity,285,965,79,28,8,3,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
-10,0,Change in Forest Expenses by Entity,285,827,65,19,8,2,0,7,-1,0,0,0,128-128-128,192-192-192,|||128-128-128,0,0,0,0,0,0
-1,0,FD50A0FBB30B55A061EFED5E802E66F0D8BF314D,9782FEDB13EA514753DF206D1F04E836C16660BC,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-12,0,0,5,920,119,75,8,135,0,4,-1,0,0,0,-1--1--1,255-255-128,|||0-0-0,0,0,0,0,0,0
-The LULUCF sector does not currently track fuel use.  Fuel use by relevant entities are handled in other sectors, such as wood burning to heat homes in the Buildings sector, or fuel used by timber companies included in the "other industries" industry category in the Industry sector.
-10,0,LULUCF Change in Revenue by Entity,827,1092,68,19,8,3,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
-1,0,AA3E9E12150F41C8236B4B30D180F187D3D993D0,213AB460459EE7C7A0668504685E260253583A6A,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,LULUCF Change in Nonenergy Industry Expenditures by ISIC Code,285,1104,92,28,8,3,0,16,0,0,0,0,-1--1--1,0-0-0,||I|0-0-0,0,0,0,0,0,0
-1,0,9782FEDB13EA514753DF206D1F04E836C16660BC,7CCEA8F297DE5355BC11977E558C54663D46FFA3,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,Change in Forest Expenses by Entity,827,827,65,19,8,2,0,7,-1,0,0,0,128-128-128,192-192-192,|||128-128-128,0,0,0,0,0,0
-1,0,7586EA2C74A3C36A8470536D8AA8267720B720EA,AA3E9E12150F41C8236B4B30D180F187D3D993D0,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-\\\---/// Sketch information - do not modify anything except names
-V301  Do not put anything below this section - it will be ignored
 *Carbon Capture & Sequestration
 $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
 10,0,This Year CO2 Sequestered,1182,261,52,19,8,3,0,16,0,0,0,0,-1--1--1,192-192-192,||I|0-0-0,0,0,0,0,0,0
@@ -27600,8 +27344,6 @@ Total Energy and Total Primary Energy
 1,0,3B485092F2BDFAFE2A6FE47AE8BB77FE3FA91B10,0ED57E3677980D6440B7322DA0C624C85B5A5753,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
 1,0,667B95B876854828B451BF14A91992C1F073F5FD,0ED57E3677980D6440B7322DA0C624C85B5A5753,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
 1,0,0ED57E3677980D6440B7322DA0C624C85B5A5753,4DF8D4FE48BED8C162FB5752BCAEEE0A854E9496,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-10,0,LULUCF Anthropogenic Pollutant Emissions,-2812,-885,92,24,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-1,0,91F1C7877751D067B99BF530C70C430860E5B5F0,167B43213071D3518104AFFD87BBFB59ED2B6039,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,Industrial Sector Pollutant Emissions,-2812,-1102,68,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 1,0,6369AD97B056239D71282E351A1E0F2F9FB49503,167B43213071D3518104AFFD87BBFB59ED2B6039,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,Total CO2e Emissions by Sector,-2812,-626,65,19,8,3,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
@@ -27614,8 +27356,6 @@ Total primary energy includes all thermal fuels (coal, natural gas, nuclear fuel
 12,0,0,-1195,-490,75,19,8,7,0,4,-1,0,0,0,-1--1--1,255-255-128,|||0-0-0,0,0,0,0,0,0
 This variable already includes distributed RE.
 10,0,BAU Building Components Energy Use,-598,-1068,85,20,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-10,0,BLAPE BAU LULUCF Anthropogenic Pollutant Emissions,-2234,-885,120,20,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-1,0,11E5708635F79CCFA409913ABA24065E2F44CC1E,0ED57E3677980D6440B7322DA0C624C85B5A5753,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
 10,0,Direct Change in Cash Flow by Entity,-13,263,72,19,8,131,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
 10,0,BAU Total CO2e Emissions by Sector,-2234,-626,65,19,8,3,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
 1,0,AF4291B90D2766EE7E8FE72247FB7CCC18A2E032,6970C3153B73469CA569AC2200B3E468E5A34244,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
@@ -27653,9 +27393,7 @@ Direct Changes in Energy Expenditures, Nonenergy Expenditures, and Revenue
 10,0,Industry Sector Change in Nonenergy Expenditures by Entity,-1092,264,119,24,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,District Heating Change in Nonenergy Expenditures by Entity,-1092,367,120,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Hydrogen Sector Change in Nonenergy Expenditures by Entity,-1092,471,123,23,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-10,0,LULUCF Change in Nonenergy Expenditures by Entity,-1092,576,111,21,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Direct Change in Nonenergy Expenditures by Entity,-1092,911,95,21,8,131,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
-1,0,A906AA1B63EECDEF8CE227FFA8758861BD8981A0,8F4A4F9A3F8FCDB8CC89B0C83DAC2EAF3B57D6A8,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,36DD45B541ACE65C7A897387043F5B770A442529,8F4A4F9A3F8FCDB8CC89B0C83DAC2EAF3B57D6A8,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,A293BB97D5DE124728DC279213917FBDE04F24A8,8F4A4F9A3F8FCDB8CC89B0C83DAC2EAF3B57D6A8,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,3E2AF50617D7D76F6CEE640F383BDB4E6A023E14,8F4A4F9A3F8FCDB8CC89B0C83DAC2EAF3B57D6A8,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
@@ -27668,11 +27406,9 @@ Direct Changes in Energy Expenditures, Nonenergy Expenditures, and Revenue
 10,0,Industry Sector Change in Revenue by Entity,-766,264,80,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,District Heating Change in Revenue by Entity,-766,367,80,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Hydrogen Sector Change in Revenue by Entity,-766,471,93,21,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-10,0,LULUCF Change in Revenue by Entity,-766,576,72,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Fuel Trade and Subsidy Change in Revenue by Entity,-766,670,100,28,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Direct Change in Revenue by Entity,-766,911,60,19,8,3,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
 1,0,24D6CD990E1DE73B75961CF1F1F13B2095C3B676,53FE3183476A080B0DD536FA8D9E8CE65E6B5769,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,A392A39C8A333851BC7E0E763B996ABDBCA81919,53FE3183476A080B0DD536FA8D9E8CE65E6B5769,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,2027CF638CB894CE2135F49096F3061287A8E4D4,53FE3183476A080B0DD536FA8D9E8CE65E6B5769,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,819C8C7688F12318E0D364C38B84CB66A3ADE5A7,53FE3183476A080B0DD536FA8D9E8CE65E6B5769,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,DA3E40E581674F7FD51FA1D0AD77FA301C7F956C,53FE3183476A080B0DD536FA8D9E8CE65E6B5769,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
@@ -27751,12 +27487,10 @@ Changes in Nonenergy Industry Revenue by ISIC Code
 10,0,Buildings Sector Change in Nonenergy Industry Revenue by ISIC Code,-2488,140,133,23,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,District Heating Change in Nonenergy Industry Revenue by ISIC Code,-2488,312,128,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Hydrogen Sector Change in Nonenergy Industry Revenue by ISIC Code,-2488,394,137,20,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-10,0,LULUCF Change in Nonenergy Industry Revenue by ISIC Code,-2488,483,113,24,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Geoengineering Sector Change in Nonenergy Industry Revenue by ISIC Code,-2488,643,144,28,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Industry Sector Change in Nonenergy Industry Revenue by ISIC Code,-2488,228,133,24,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Direct Change in Revenue for Nonenergy ISIC Codes,-2488,775,87,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
 1,0,AA7EDBCB9A6947735EF5934B23302E9EED8F7331,3B5734610D00AD5FD53EBE479F6D436982E35E7F,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,0A4DCEFDDBEE97DF865945347C51ABC43C81376D,3B5734610D00AD5FD53EBE479F6D436982E35E7F,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,3E5C2392EDB7E6D2D495C221479891950A3641B3,3B5734610D00AD5FD53EBE479F6D436982E35E7F,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,7CD458A78B6B1815E0F7677ECA8269E911206C41,3B5734610D00AD5FD53EBE479F6D436982E35E7F,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,FBF35079B201137D0DB08389233115F7FFD9C2B2,3B5734610D00AD5FD53EBE479F6D436982E35E7F,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
@@ -27767,10 +27501,8 @@ Changes in Nonenergy Industry Revenue by ISIC Code
 12,0,0,-2936,-137,199,33,3,135,0,12,-1,3,0,0,-1--1--1,192-255-255,|18||0-0-0,0,0,0,0,0,0
 Changes in Nonenergy Industry Expenditures by ISIC Code
 10,0,Buildings Sector Change in Nonenergy Industry Expenditures by ISIC Code,-2936,140,132,24,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-10,0,LULUCF Change in Nonenergy Industry Expenditures by ISIC Code,-2936,483,129,24,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Industry Sector Change in Nonenergy Industry Expenditures by ISIC Code,-2936,228,140,27,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Change in Nonenergy Industry Expenditures by ISIC Code,-2936,775,109,23,8,131,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
-1,0,F9801A4E896A6CFCA12830D79B9D58059D38021A,B064A82C92146A2FF035A4F70D88DBBA515A5964,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,396B131903B6DDC82C243F92513BF2C92A7C5E14,B064A82C92146A2FF035A4F70D88DBBA515A5964,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,DFEF63D288A7C0FA7141B0BFD24FA224CA1E618D,B064A82C92146A2FF035A4F70D88DBBA515A5964,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,9A1AFC04B7BD24776B26F8D5A6423686BC4ACAA5,B064A82C92146A2FF035A4F70D88DBBA515A5964,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
@@ -28069,6 +27801,18 @@ This includes energy carriers (electricity, hydrogen, district heat).
 1,0,E570A8A5C6220EC4903F4A61560C565B7D3D0227,E726F0FE326468604BEE02EDE0A46FE8D2334156,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 12,0,0,1544,-137,388,20,3,135,0,12,-1,3,0,0,-1--1--1,192-255-255,|18||0-0-0,0,0,0,0,0,0
 BAU Energy Supplier Revenue by Fuel
+10,0,BLAPE BAU LULUCF Anthropogenic Pollutant Emissions,-2234,-879,66,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,438DE78233B617EC5A761093408700A16E4917A0,0ED57E3677980D6440B7322DA0C624C85B5A5753,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Change in Revenue by Entity,-766,572,56,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,0E2B735AACF032598FB01AA9E073624D1BF952F9,53FE3183476A080B0DD536FA8D9E8CE65E6B5769,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Change in Nonenergy Expenditures by Entity,-1092,571,64,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,0C4BC8BBEE272E59B3826B9A6EB29D4B78653D84,8F4A4F9A3F8FCDB8CC89B0C83DAC2EAF3B57D6A8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Change in Nonenergy Industry Expenditures by ISIC Code,-2936,310,74,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,0AD7DE781F8EA9BEF04632E3F140F76694D76D06,B064A82C92146A2FF035A4F70D88DBBA515A5964,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Change in Nonenergy Industry Revenue by ISIC Code,-2488,482,62,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,081B42652C27A61E2096E78E7CF2DB2A06A77AA1,3B5734610D00AD5FD53EBE479F6D436982E35E7F,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Anthropogenic Pollutant Emissions,-2812,-882,63,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,B18E61B711329942C2EEA33806E9A4571CC07C0A,167B43213071D3518104AFFD87BBFB59ED2B6039,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
 \\\---/// Sketch information - do not modify anything except names
 V301  Do not put anything below this section - it will be ignored
 *Input-Output Model
@@ -28987,8 +28731,6 @@ Geoengineering
 1,0,CB57D6626812E3E35155948F0F1E27F35D57D82B,5FE0F62FA73E160A722165B1AA7CD95B0A7720E7,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,D28DA6DC84B665FB515085E6351785522252E463,5FE0F62FA73E160A722165B1AA7CD95B0A7720E7,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,1BDC28ADB6C158591331F8D31CCAF14D5367B1DF,5FE0F62FA73E160A722165B1AA7CD95B0A7720E7,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,Change in Forest Expenses by Entity,155,-373,65,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-1,0,24156AB6CC48BED0799FA7C660DA9BDEDFF91C51,E77DA5EA484C63B179C591DE850F192F30268169,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,Change in Fuel Import Expenditures,380,-1284,72,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 1,0,F92FF554EF039ED645F2707F9A00B3365044D7E3,DC874204840A56CF35E94F5E760A8E55DB4B33F3,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 12,0,0,380,-1344,119,28,8,7,0,4,-1,0,0,0,-1--1--1,255-255-128,|||0-0-0,0,0,0,0,0,0
@@ -29036,6 +28778,8 @@ This variable is no longer used in the cost metric (because we now subtract out 
 1,0,45A181A36744ADD423D87BED8F586005659BBBE4,A60F0FBA7488D7F468F1131B39BE50C4E810ED6A,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,Change in Domestic Individual Income Tax Revenue by ISIC Code,815,197,80,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 1,0,8D0909E3E22F8C96BCDAC8648978B997DBAF871D,9356A1CD0AE3821410E2B5A9084FF4D126C6BA3A,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
+10,0,Change in Forest Expenses by Entity,176,-373,53,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,66847CB09E66FFB416394F6A9056C2139387D58C,E77DA5EA484C63B179C591DE850F192F30268169,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
 \\\---/// Sketch information - do not modify anything except names
 V301  Do not put anything below this section - it will be ignored
 *Additional Outputs
@@ -29102,8 +28846,6 @@ Misc. Additional Outputs
 1,0,D821E0A25517E8435165791B44581337EFFC43A9,2A548F98345257C84684BC1930B2FFDF2A7BFB99,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
 12,0,0,1824,-146,328,56,8,135,0,4,-1,0,0,0,-1--1--1,255-255-128,|||0-0-0,0,0,0,0,0,0
 Energy-related emissions are all anthropogenic emissions from within the borders of the modeled region except industrial process emissions and anthropogenic LULUCF emissions.  Energy-related emissions captured by CCS do not count as emissions (i.e. we only include net energy-related emissions here).  However, emissions from fuel burned in the geoengineering sector are energy-related emissions, but CO2 captured from the atmosphere (DAC) does not count as negative energy-related emissions.
-10,0,LULUCF Anthropogenic Pollutant Emissions,1608,-42,68,28,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-1,0,8FA377EE6EA8D09F40DF9C0163985438D431E878,5B2FE507E126AA3D0F7AE32D72C294DBC757D25C,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,VoaSL Value of a Statistical Life,994,442,60,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-192,|||0-0-0,0,0,0,0,0,0
 10,0,Electricity Generation by Type Including Distributed Generation,527,997,84,28,8,2,0,7,-1,0,0,0,128-128-128,255-192-128,|||128-128-128,0,0,0,0,0,0
 10,0,BAU Electricity Generation Capacity by Type Including Distributed Generation,258,1133,92,28,8,2,0,3,0,0,0,0,128-128-128,0-0-0,||I|128-128-128,0,0,0,0,0,0
@@ -29120,8 +28862,6 @@ Energy-related emissions are all anthropogenic emissions from within the borders
 10,0,Change in Net Imports of Electricity,535,1443,67,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 1,0,B4CD2847AE8ECD2F302B0823027346BB4903542E,5E738F2AE4A06CE13AB84071A6E59560B3F5619C,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,9495989B120E297C527C4ECBA4397F1C16CE63C0,5E738F2AE4A06CE13AB84071A6E59560B3F5619C,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,BLAPE BAU LULUCF Anthropogenic Pollutant Emissions,1608,245,80,28,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-1,0,CDEB1911C826F7F54B11AD2C655CEF76CDD2646D,7533FD3A9D569ADDF2D8D339885EAC26C368F6A6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
 10,0,Process Emissions after CCS,1836,-42,64,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 1,0,8FB7FE569BC964B0A006F690456D8B42E68082B3,5B2FE507E126AA3D0F7AE32D72C294DBC757D25C,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,BAU Process Emissions after CCS,1836,245,71,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
@@ -29163,6 +28903,14 @@ Energy-related emissions are all anthropogenic emissions from within the borders
 1,0,82C578CB2525CD18F63F38AC80C666FA409978DC,2A548F98345257C84684BC1930B2FFDF2A7BFB99,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,BAU Absolute Change in In Scope Emissions due to Electricity Imports,229,358,99,28,8,2,0,19,-1,0,0,0,128-128-128,0-0-0,||I|128-128-128,0,0,0,0,0,0
 1,0,24C10FB03F4E1DA47187F02315AF395A57909F81,2A548F98345257C84684BC1930B2FFDF2A7BFB99,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,BLAPE BAU LULUCF Anthropogenic Pollutant Emissions,1838,552,66,34,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,BEC5683DEEDDD988E57DD0293781E55D512F62CE,7533FD3A9D569ADDF2D8D339885EAC26C368F6A6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Anthropogenic Pollutant Emissions,1835,159,66,27,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,BLAPE BAU LULUCF Anthropogenic Pollutant Emissions,1513,228,66,21,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,173909FB1558E1DB2B51F2B8F24AFCA4AD34B2F2,8C5266A015B131680E0352F64662E554AC85F101,0,1,0,0,0,0,0,-1--1--1,,1|(0,0)|
+10,0,Change in LULUCF Emissions,1621,284,57,14,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,A3CE03A446832339BC8DACD1F12A874C5BF05831,8C5266A015B131680E0352F64662E554AC85F101,0,1,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,0,8C5266A015B131680E0352F64662E554AC85F101,5B2FE507E126AA3D0F7AE32D72C294DBC757D25C,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 \\\---/// Sketch information - do not modify anything except names
 V301  Do not put anything below this section - it will be ignored
 *Web Application Support Variables
@@ -31381,14 +31129,10 @@ Each sector's changes in cash flows should also sum to zero.  Therefore, if the 
 10,0,Change in District Heating Pollutant Emissions,-1391,896,93,24,8,131,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
 1,0,06641CBC3E156A429A0B795A97952E731C49CEE9,E71EA3189B868D3CC50560D33F8744D2B5CA5F02,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,5591D35844ECF8899B338B3BDAC395DB93DABD6C,E71EA3189B868D3CC50560D33F8744D2B5CA5F02,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,LULUCF Anthropogenic Pollutant Emissions,-1668,1029,88,20,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Change in LULUCF Pollutant Emissions,-1399,1029,68,20,8,3,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
-1,0,BF4FB78F40D372E80F952C1C01BCC17A517CABF4,91983F499D2ABC5FBA2BAB58C5392854EC895DF9,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,Sum of LULUCF Changes in Cash Flows,68,1045,80,20,8,131,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
 10,0,Industrial Sector Pollutant Emissions,-1646,748,68,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 1,0,AF24C492C1FCEEE08636F56BAC25A4B5FABCA55F,B3F0A78E90806AA70186EE74008B096E66618293,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,BLAPE BAU LULUCF Anthropogenic Pollutant Emissions,-1659,1093,81,28,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-1,0,298AF9F0EFCDC035CEB1E2A46F02CA9498C81EC6,91983F499D2ABC5FBA2BAB58C5392854EC895DF9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
 10,0,Direct Change in Cash Flow by Entity,-1079,193,72,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 1,0,9943DAC92CBE6A2816DF8C9556535248A59F2820,BB49463EFA2DAE82242FA5D9B2BF41A170890A6D,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,Sum of Fuel Trade and Subsidy Changes in Cash Flows,333,1045,103,19,8,131,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
@@ -31429,10 +31173,6 @@ Each sector's changes in cash flows should also sum to zero.  Therefore, if the 
 1,0,269C9DD98FB39B69B760FCE791210C5C7144F347,7BE88A19257305DB02FAAC16E1E3CAB7EE2FD636,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,541C8000DE7727C1B17750EEC31B7D4830C96285,7BE88A19257305DB02FAAC16E1E3CAB7EE2FD636,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,65A5E24C5725AA95BE1801BA7B5BDBDBB90FF6F4,7BE88A19257305DB02FAAC16E1E3CAB7EE2FD636,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,LULUCF Change in Nonenergy Expenditures by Entity,68,804,76,31,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-10,0,LULUCF Change in Revenue by Entity,68,925,64,28,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-1,0,8903F0C439648288E859190597956911B5452C65,5D3181DCE7FB70637F70DF1865F970D11A179A12,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,63E03E00A185717F4408E7946BDC7BA633306554,5D3181DCE7FB70637F70DF1865F970D11A179A12,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,Fuel Trade and Subsidy Change in Energy Expenditures by Entity,333,689,80,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Fuel Trade and Subsidy Change in Revenue by Entity,333,925,68,32,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 1,0,C8853AAA52B40D863A382587826A453D3D98E7CF,F624834795173047A63DA5251B00202144759151,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
@@ -31479,11 +31219,7 @@ Whether or not policies are ENABLED, all changes in revenues and expenditures fo
 10,0,Check for Equality of Hydrogen Sector Nonenergy Industry Revenue,-874,2340,92,28,8,3,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
 1,0,3EEE7A2CBA4426060465B10BC5C703296E64DA9E,18BC8523A3720C1114DE9C133E388645EAE7D634,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,4269A5CD0A0D4FC131C5742FFB969A06E4E1587D,18BC8523A3720C1114DE9C133E388645EAE7D634,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-10,0,LULUCF Change in Nonenergy Industry Revenue by ISIC Code,-624,2109,81,32,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-10,0,LULUCF Change in Revenue by Entity,-624,2218,72,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Check for Equality of LULUCF Nonenergy Industry Revenue,-624,2340,69,28,8,3,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
-1,0,BEB650B7DE344F8743237FC7432CF981B03606EF,2E6455B0CE670EDA32F48C28E290BBEECE0E8139,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,83D351B7F961F0CD3377A460AE8C1BAE601C57C3,2E6455B0CE670EDA32F48C28E290BBEECE0E8139,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,Geoengineering Sector Change in Nonenergy Industry Revenue by ISIC Code,-356,2109,97,29,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Geoengineering Sector Change in Revenue by Entity,-356,2218,104,25,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Check for Equality of Geoengineering Sector Nonenergy Industry Revenue,-356,2340,93,28,8,3,0,4,0,0,0,0,-1--1--1,255-192-128,|||0-0-0,0,0,0,0,0,0
@@ -31509,8 +31245,6 @@ Whether or not policies are ENABLED, all changes in revenues and expenditures fo
 1,0,49E06229B31583B555201260ECE56C572A1669BE,51BD767479F8B023470540301732770BF78E598C,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 10,0,Buildings Sector Change in Nonenergy Industry Expenditures by ISIC Code,622,1944,96,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Industry Sector Change in Nonenergy Industry Expenditures by ISIC Code,893,1944,96,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-10,0,LULUCF Change in Nonenergy Expenditures by Entity,1173,2173,89,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-10,0,LULUCF Change in Nonenergy Industry Expenditures by ISIC Code,1173,1944,96,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Buildings Sector Change in Energy Expenditures by Entity,622,2060,92,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Buildings Sector Change in Nonenergy Expenditures by Entity,622,2173,92,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 10,0,Industry Sector Change in Energy Expenditures by Entity,893,2060,87,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
@@ -31524,8 +31258,6 @@ Whether or not policies are ENABLED, all changes in revenues and expenditures fo
 1,0,4DB47AF9B18C2E91D643D86451E568DA92DFED2B,EA99AAC05C4759E37905A240650CE2C98CB557D3,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,662DD530B1450AACD17F6C94797149A96C35625F,EA99AAC05C4759E37905A240650CE2C98CB557D3,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 1,0,6B7074576731027170290C162215A7B4E992C1E0,EA99AAC05C4759E37905A240650CE2C98CB557D3,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,1FA715AEBD4B069F794A789941F9B341974B0BCD,F5E7FC78FE828E26C809723B1323551B207C2F5E,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
-1,0,21DAEA384D1DF90901E3D933FFC9ABA459E53FA7,F5E7FC78FE828E26C809723B1323551B207C2F5E,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
 12,0,0,-1551,1346,177,20,3,135,0,12,-1,3,0,0,-1--1--1,192-255-255,|18||0-0-0,0,0,0,0,0,0
 Cash Flows
 12,0,0,-758,1346,552,20,3,135,0,12,-1,3,0,0,-1--1--1,192-255-255,|18||0-0-0,0,0,0,0,0,0
@@ -31626,6 +31358,22 @@ Revenue changes for fuel-supplying cash flow entities should be the same after a
 Allocating BAU energy revenue to fuel types should not change the total amount of revenue.
 10,0,BAU Fuel Industry Revenue by Fuel,2622,540,66,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 1,0,FFC7AE9E08D2F3C4B68AD18AFAD66BB1A3138FA9,EEA210C799476051E0882A352C266F5926BBFAC8,0,0,0,0,0,128,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Change in Nonenergy Expenditures by Entity,1172,2171,64,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,00B73253B9107845A685463AF21852FB1D0AD89B,F5E7FC78FE828E26C809723B1323551B207C2F5E,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Change in Nonenergy Industry Expenditures by ISIC Code,1169,1947,74,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,E67CD003B066094B544E60F3D39BA9C3DF45751A,F5E7FC78FE828E26C809723B1323551B207C2F5E,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,BLAPE BAU LULUCF Anthropogenic Pollutant Emissions,-1643,1078,66,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,82A1E3F2C9128D89A1EEFF54AFE8DB2AF27B7F11,91983F499D2ABC5FBA2BAB58C5392854EC895DF9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Anthropogenic Pollutant Emissions,-1637,1009,63,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,0A2D2CB059E0EB387BCBEB4A2F0BD40988AEDD95,91983F499D2ABC5FBA2BAB58C5392854EC895DF9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Change in Nonenergy Expenditures by Entity,65,800,64,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,275DD76325FCC27A2710C8176859DC10114746DC,5D3181DCE7FB70637F70DF1865F970D11A179A12,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Change in Revenue by Entity,65,921,56,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,E5C114997247D9D7E746817FD529E86814C3FC5F,5D3181DCE7FB70637F70DF1865F970D11A179A12,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Change in Nonenergy Industry Revenue by ISIC Code,-623,2110,62,21,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,5178A9B73BC747E136576000EC6DD69013D5C687,2E6455B0CE670EDA32F48C28E290BBEECE0E8139,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,0,LULUCF Change in Revenue by Entity,-623,2222,56,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,0C01E33BFA71B2110D8F10843AF9C9255D99EA0F,2E6455B0CE670EDA32F48C28E290BBEECE0E8139,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
 ///---\\\
 :L<%^E!@
 8:GraphDefinitions.vgd
@@ -31687,3 +31435,18 @@ Allocating BAU energy revenue to fuel types should not change the total amount o
 105:0,0,0,0,0,0,0,0,0,0
 104:Lucida Grande|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
 83:CPL_Additions.mdl
+83:land-use.mdl
+84:/Users/tfranc03/Developer/eps-indonesia-cpl/EPS.mdl
+85:Fraction of Afforestation and Reforestation Achieved This Year
+84:/Users/tfranc03/Developer/eps-indonesia-cpl/EPS.mdl
+85:Fraction of Avoided Deforestation Achieved
+84:EPS.mdl
+85:Fraction of Avoided Deforestation Achieved This Year
+84:EPS.mdl
+85:Fraction of Forest Restoration Achieved This Year
+84:/Users/tfranc03/Developer/eps-indonesia-cpl/EPS.mdl
+85:Fraction of Forest Set Asides Achieved This Year
+84:/Users/tfranc03/Developer/eps-indonesia-cpl/EPS.mdl
+85:Fraction of Improved Forest Management Achieved This Year
+84:/Users/tfranc03/Developer/eps-indonesia-cpl/EPS.mdl
+85:Fraction of Peatland Restoration Achieved This Year
