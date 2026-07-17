@@ -76,7 +76,7 @@ PolicyElements = (
     ("Schedule 1",(2020,0),(2026,0),(2050,1),(2070,1)),
   ),
   (("trans mode shifting","passenger","LDVs"),
-    ("Schedule 1",(2020,0),(2026,0),(2070,1)),
+    ("Schedule 1",(2020,0),(2026,0),(2030,1),(2070,1)),
   ),
   (("trans mode shifting","passenger","HDVs"),
     ("Schedule 1",(2020,0),(2026,0),(2070,1)),
