@@ -222,6 +222,22 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,0
 GraphDefinitions.vgd : CPL_2035_Summary
 12,0,0,274,290,222,239,8,15,0,0,1,0,0,0,0,0,0,0,0,0
 GraphDefinitions.vgd : CPL_Target_Summary
+10,0,Output Total CO2e Emissions,115,583,61,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Output Total CO2e Emissions by Sector,115,693,64,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Output Change in Domestic Jobs,269,589,58,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Change in Domestic Jobs after Productivity Effects by ISIC Code,272,647,65,26,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Direct Change in Domestic Jobs after Productivity Effects by ISIC Code,269,718,65,32,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Indirect Change in Domestic Jobs after Productivity Effects by ISIC Code,268,796,65,32,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Induced Change in Domestic Jobs after Productivity Effects by ISIC Code,266,882,65,32,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Output Cumulative Change in National Debt,431,702,61,26,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Output Change in Electricity Generation Capacity,103,754,63,26,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Output Electricity Generation by Type,108,815,63,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Output Vehicles in Millions,102,874,60,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Output Change in GDP,422,581,58,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Output Perc Change in GDP,433,640,64,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Output Change in Cash Flow by Entity,435,761,63,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Output Change in Government Cash Flow by Cash Flow Source,424,829,58,32,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Output Total CO2e Emissions Excluding LULUCF,119,636,61,26,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 \\\---/// Sketch information - do not modify anything except names
 V301  Do not put anything below this section - it will be ignored
 *CPL Graphing Variables
