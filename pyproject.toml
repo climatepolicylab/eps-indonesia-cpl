@@ -1,0 +1,22 @@
+[project]
+name = "eps-indonesia-cpl"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Travis Franck", email = "11573160+travisfranck@users.noreply.github.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "matplotlib>=3.11.1",
+    "numpy>=2.5.2",
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.5",
+]
+
+[project.scripts]
+eps-indonesia-cpl = "eps_indonesia_cpl:main"
+
+[build-system]
+requires = ["uv_build>=0.12.9,<0.13.0"]
+build-backend = "uv_build"
